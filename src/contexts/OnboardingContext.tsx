@@ -93,9 +93,9 @@ const onboardingSteps: OnboardingStep[] = [
 export function OnboardingProvider({ children }: { children: React.ReactNode }) {
   const [isOnboardingActive, setIsOnboardingActive] = useState(false)
   const [currentStep, setCurrentStep] = useState(0)
-  const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState(() => {
-    return localStorage.getItem('onboardingCompleted') === 'true'
-  })
+  // const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState(() => {
+  //   return localStorage.getItem('onboardingCompleted') === 'true'
+  // })
   
   const location = useLocation()
   const navigate = useNavigate()
@@ -103,7 +103,7 @@ export function OnboardingProvider({ children }: { children: React.ReactNode }) 
   const startOnboarding = () => {
     setCurrentStep(0)
     setIsOnboardingActive(true)
-    setHasCompletedOnboarding(false)
+    // setHasCompletedOnboarding(false)
     localStorage.removeItem('onboardingCompleted')
     // Navigate to dashboard if not already there
     if (location.pathname !== '/dashboard') {
@@ -144,7 +144,7 @@ export function OnboardingProvider({ children }: { children: React.ReactNode }) 
 
   const completeOnboarding = () => {
     setIsOnboardingActive(false)
-    setHasCompletedOnboarding(true)
+    // setHasCompletedOnboarding(true)
     localStorage.setItem('onboardingCompleted', 'true')
   }
 
