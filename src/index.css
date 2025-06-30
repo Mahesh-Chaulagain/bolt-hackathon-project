@@ -1,0 +1,376 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-gradient-to-br from-eco-50 to-earth-50 dark:from-gray-900 dark:to-gray-800 min-h-screen transition-colors duration-300;
+  }
+
+  /* Dark mode support */
+  .dark {
+    color-scheme: dark;
+  }
+
+  /* Ensure root element also gets dark background */
+  #root {
+    @apply min-h-screen bg-gradient-to-br from-eco-50 to-earth-50 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300;
+  }
+
+  /* Dark mode text colors */
+  .dark body {
+    @apply text-gray-100;
+  }
+
+  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    @apply text-white;
+  }
+
+  /* Ensure proper text contrast in dark mode */
+  .dark .text-gray-900 {
+    @apply text-white;
+  }
+
+  .dark .text-gray-800 {
+    @apply text-gray-100;
+  }
+
+  .dark .text-gray-700 {
+    @apply text-gray-200;
+  }
+
+  .dark .text-gray-600 {
+    @apply text-gray-300;
+  }
+
+  .dark .text-gray-500 {
+    @apply text-gray-400;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/20 dark:border-gray-700/20 shadow-lg;
+  }
+  
+  .eco-gradient {
+    @apply bg-gradient-to-r from-eco-500 to-eco-600;
+  }
+  
+  .earth-gradient {
+    @apply bg-gradient-to-r from-earth-500 to-earth-600;
+  }
+  
+  .btn-primary {
+    @apply eco-gradient text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-semibold transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95 text-sm sm:text-base cursor-pointer;
+  }
+  
+  .btn-secondary {
+    @apply bg-white dark:bg-gray-800 text-eco-600 dark:text-eco-400 border-2 border-eco-200 dark:border-eco-700 px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-semibold transition-all duration-200 hover:bg-eco-50 dark:hover:bg-eco-900/20 hover:border-eco-300 dark:hover:border-eco-600 text-sm sm:text-base cursor-pointer;
+  }
+  
+  .metric-card {
+    @apply glass-card p-4 sm:p-6 rounded-xl hover:shadow-xl transition-all duration-300 hover:-translate-y-1;
+  }
+  
+  .floating-element {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Mobile-specific styles */
+  .mobile-nav {
+    @apply fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 z-50 md:hidden;
+  }
+
+  .mobile-nav-item {
+    @apply flex flex-col items-center justify-center py-2 px-1 text-xs transition-colors duration-200;
+  }
+
+  .mobile-sidebar {
+    @apply fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-gray-900 transform transition-transform duration-300 ease-in-out md:translate-x-0;
+  }
+
+  .mobile-sidebar.closed {
+    @apply -translate-x-full;
+  }
+
+  .mobile-overlay {
+    @apply fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden;
+  }
+
+  /* Responsive text sizes */
+  .responsive-title {
+    @apply text-2xl sm:text-3xl lg:text-4xl font-bold;
+  }
+
+  .responsive-subtitle {
+    @apply text-base sm:text-lg lg:text-xl;
+  }
+
+  /* Touch-friendly buttons */
+  .touch-button {
+    @apply min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95;
+  }
+
+  /* Onboarding highlight */
+  .onboarding-highlight {
+    @apply relative z-30 ring-4 ring-eco-500 ring-opacity-75 rounded-lg;
+  }
+
+  /* Custom Audio/Video Player Styles */
+  .slider {
+    background: linear-gradient(to right, #8b5cf6 0%, #3b82f6 100%);
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    cursor: pointer;
+  }
+
+  .slider:hover {
+    opacity: 1;
+  }
+
+  .slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(to right, #8b5cf6, #3b82f6);
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(to right, #8b5cf6, #3b82f6);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Video Player Enhancements */
+  video::-webkit-media-controls-panel {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  video::-webkit-media-controls-play-button,
+  video::-webkit-media-controls-pause-button {
+    background-color: #22c55e;
+    border-radius: 50%;
+  }
+
+  video::-webkit-media-controls-timeline {
+    background-color: #22c55e;
+  }
+
+  /* Button hover effects */
+  .btn-primary:hover {
+    @apply shadow-lg transform scale-105;
+  }
+
+  .btn-secondary:hover {
+    @apply shadow-md transform scale-105;
+  }
+
+  /* Ensure all interactive elements are clickable */
+  button, .btn-primary, .btn-secondary, .touch-button {
+    @apply cursor-pointer select-none;
+  }
+
+  button:disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+
+  /* Link styles */
+  a {
+    @apply cursor-pointer transition-colors duration-200;
+  }
+
+  /* Form elements in dark mode */
+  .dark input, .dark textarea, .dark select {
+    @apply bg-gray-800 border-gray-600 text-white placeholder-gray-400;
+  }
+
+  .dark input:focus, .dark textarea:focus, .dark select:focus {
+    @apply border-eco-500 ring-eco-500;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Safe area for mobile devices */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Mobile-first responsive utilities */
+  .container-mobile {
+    @apply px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto;
+  }
+
+  /* Ensure proper contrast in dark mode */
+  .dark .bg-white {
+    @apply bg-gray-800;
+  }
+
+  .dark .bg-gray-50 {
+    @apply bg-gray-800;
+  }
+
+  .dark .bg-gray-100 {
+    @apply bg-gray-700;
+  }
+
+  .dark .border-gray-200 {
+    @apply border-gray-700;
+  }
+
+  .dark .border-gray-300 {
+    @apply border-gray-600;
+  }
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #22c55e;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #16a34a;
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-track {
+  background: #374151;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #22c55e;
+}
+
+/* Mobile viewport fixes */
+@supports (-webkit-touch-callout: none) {
+  .mobile-viewport-fix {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Audio Player Animations */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.33);
+  }
+  40%, 50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.33);
+  }
+}
+
+.audio-playing::before {
+  content: '';
+  position: absolute;
+  border: 3px solid #8b5cf6;
+  border-radius: 50%;
+  animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+/* Video Player Enhancements */
+.video-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.video-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(34, 197, 94, 0.1), rgba(59, 130, 246, 0.1));
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Dark mode specific styles */
+.dark .bg-gradient-to-br {
+  background: linear-gradient(to bottom right, rgb(17 24 39), rgb(31 41 55)) !important;
+}
+
+.dark body {
+  background: linear-gradient(to bottom right, rgb(17 24 39), rgb(31 41 55)) !important;
+}
+
+.dark #root {
+  background: linear-gradient(to bottom right, rgb(17 24 39), rgb(31 41 55)) !important;
+}
+
+/* Ensure all containers have proper dark background */
+.dark .min-h-screen {
+  background: linear-gradient(to bottom right, rgb(17 24 39), rgb(31 41 55)) !important;
+}
+
+/* Animation for smooth transitions */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Ensure buttons are always clickable */
+button:not(:disabled) {
+  @apply cursor-pointer;
+}
+
+/* Improve focus visibility */
+button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  @apply outline-2 outline-offset-2 outline-eco-500;
+}
+
+/* Responsive improvements */
+@media (max-width: 640px) {
+  .metric-card {
+    @apply p-3;
+  }
+  
+  .btn-primary, .btn-secondary {
+    @apply px-3 py-2 text-sm;
+  }
+}
