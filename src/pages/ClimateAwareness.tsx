@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { 
   Globe, 
   Thermometer, 
   CloudRain, 
   Wind, 
-  Zap,
+  // Zap,
   TreePine,
-  Factory,
-  Car,
-  Home,
-  TrendingUp,
-  TrendingDown,
+  // Factory,
+  // Car,
+  // Home,
+  // TrendingUp,
+  // TrendingDown,
   AlertTriangle,
-  Info,
-  Target,
-  MapPin,
-  Building,
+  // Info,
+  // Target,
+  // MapPin,
+  // Building,
   Newspaper,
   Clock,
   ExternalLink,
   RefreshCw,
-  Calendar,
+  // Calendar,
   Lightbulb
 } from 'lucide-react'
-import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
+import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 
 export default function ClimateAwareness() {
   const [activeTab, setActiveTab] = useState('overview')
@@ -218,12 +218,12 @@ export default function ClimateAwareness() {
     { year: '2024', co2: 421.5, target: 350 }
   ]
 
-  const emissionsSources = [
-    { source: 'Energy', percentage: 73.2, color: '#ef4444', icon: Zap },
-    { source: 'Agriculture', percentage: 18.4, color: '#22c55e', icon: TreePine },
-    { source: 'Industrial', percentage: 5.2, color: '#f97316', icon: Factory },
-    { source: 'Waste', percentage: 3.2, color: '#8b5cf6', icon: Home }
-  ]
+  // const emissionsSources = [
+  //   { source: 'Energy', percentage: 73.2, color: '#ef4444', icon: Zap },
+  //   { source: 'Agriculture', percentage: 18.4, color: '#22c55e', icon: TreePine },
+  //   { source: 'Industrial', percentage: 5.2, color: '#f97316', icon: Factory },
+  //   { source: 'Waste', percentage: 3.2, color: '#8b5cf6', icon: Home }
+  // ]
 
   const getImpactColor = (impact: string) => {
     switch (impact) {

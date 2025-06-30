@@ -15,7 +15,7 @@ import {
   Lightbulb,
   Calendar,
   Award,
-  MessageSquare,
+  // MessageSquare,
   RefreshCw,
   Download
 } from 'lucide-react'
@@ -26,8 +26,8 @@ import toast from 'react-hot-toast'
 export default function AICoach() {
   const { 
     getPersonalizedTips, 
-    generateVoiceCoaching, 
-    createPersonalizedVideo, 
+    // generateVoiceCoaching, 
+    // createPersonalizedVideo, 
     analyzeHabits,
     isProcessing 
   } = useAI()
@@ -42,15 +42,15 @@ export default function AICoach() {
   const audioRef = useRef<HTMLAudioElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
-  const [duration, setDuration] = useState(300) // 5 minutes default
+  const [duration] = useState(300) // 5 minutes default
   const [volume, setVolume] = useState(1)
   const [isMuted, setIsMuted] = useState(false)
 
   // Video player state
-  const videoRef = useRef<HTMLVideoElement>(null)
+  // const videoRef = useRef<HTMLVideoElement>(null)
   const [isVideoPlaying, setIsVideoPlaying] = useState(false)
   const [videoCurrentTime, setVideoCurrentTime] = useState(0)
-  const [videoDuration, setVideoDuration] = useState(180) // 3 minutes default
+  const [videoDuration] = useState(180) // 3 minutes default
   const [videoVolume, setVideoVolume] = useState(1)
   const [isVideoMuted, setIsVideoMuted] = useState(false)
 

@@ -6,10 +6,10 @@ import {
   Bot, 
   User, 
   Sparkles,
-  Leaf,
+  // Leaf,
   TrendingUp,
   Lightbulb,
-  Heart,
+  // Heart,
   ThumbsUp,
   ThumbsDown,
   Loader

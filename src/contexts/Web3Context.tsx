@@ -51,7 +51,7 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
       setIsConnected(true)
       
       // Load user's tokens and NFTs
-      await loadWalletData(address)
+      await loadWalletData()
     } catch (error) {
       console.error('Failed to connect wallet:', error)
     } finally {
@@ -66,14 +66,14 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
     setNftCollection([])
   }
 
-  const loadWalletData = async (address: string) => {
+  const loadWalletData = async () => {
     if (!algorandService) return
     
     try {
-      const balance = await algorandService.getEcoTokenBalance(address)
+      const balance = await algorandService.getEcoTokenBalance()
       setEcoTokenBalance(balance)
       
-      const nfts = await algorandService.getUserNFTs(address)
+      const nfts = await algorandService.getUserNFTs()
       setNftCollection(nfts)
     } catch (error) {
       console.error('Failed to load wallet data:', error)
@@ -87,8 +87,8 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
     
     setLoading(true)
     try {
-      const nftId = await algorandService.mintAchievementNFT(walletAddress, achievementData)
-      await loadWalletData(walletAddress)
+      const nftId = await algorandService.mintAchievementNFT(achievementData)
+      await loadWalletData()
       return nftId
     } catch (error) {
       console.error('Failed to mint NFT:', error)
@@ -106,7 +106,7 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
     setLoading(true)
     try {
       await algorandService.transferEcoTokens(walletAddress, recipient, amount)
-      await loadWalletData(walletAddress)
+      await loadWalletData()
     } catch (error) {
       console.error('Failed to transfer tokens:', error)
       throw error

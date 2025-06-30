@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import  { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { 
   TrendingDown, 
   TrendingUp, 
   Award, 
   Target,
-  Calendar,
+  // Calendar,
   Leaf,
   Zap,
   Users,
   Plus
 } from 'lucide-react'
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts'
-import { useAuth } from '../contexts/AuthContext'
+// import { useAuth } from '../contexts/AuthContext'
 import { useAI } from '../contexts/AIContext'
 import { Link } from 'react-router-dom'
 import toast from 'react-hot-toast'
 
 export default function Dashboard() {
-  const { user } = useAuth()
+  // const { user } = useAuth()
   const { getPersonalizedTips, isProcessing } = useAI()
   const [personalizedTips, setPersonalizedTips] = useState<string[]>([])
   const [currentStreak, setCurrentStreak] = useState(0)
@@ -58,7 +58,7 @@ export default function Dashboard() {
   const calculateStreak = (activities: any[]) => {
     if (activities.length === 0) return 0
     
-    const today = new Date().toDateString()
+    // const today = new Date().toDateString()
     const activityDates = activities.map(a => new Date(a.date).toDateString())
     const uniqueDates = [...new Set(activityDates)].sort()
     
@@ -206,8 +206,8 @@ export default function Dashboard() {
   const totalActivities = userActivities.length
   const totalEmissions = userActivities.reduce((sum, activity) => sum + (activity.co2_impact || 0), 0)
   const averageDailyEmissions = totalActivities > 0 ? totalEmissions / Math.max(1, new Set(userActivities.map(a => new Date(a.date).toDateString())).size) : 0
-  const monthlyTarget = 300 // kg CO2
-  const monthlyProgress = Math.min(100, (totalEmissions / monthlyTarget) * 100)
+  // const monthlyTarget = 300 // kg CO2
+  // const monthlyProgress = Math.min(100, (totalEmissions / monthlyTarget) * 100)
   const ecoTokensEarned = dashboardData.ecoTokens + (currentStreak * 10) + (totalActivities * 5)
 
   // Status messages based on actual data

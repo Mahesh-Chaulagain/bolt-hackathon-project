@@ -1,29 +1,38 @@
-import algosdk from 'algosdk'
+import algosdk, { SuggestedParams } from 'algosdk'
+
+interface AchievementData {
+  title: string
+  imageUrl?: string
+}
+
+interface NFT {
+  id: string
+  name: string
+  description: string
+  imageUrl: string
+  mintedAt: string
+}
 
 export class AlgorandService {
   private algodClient: algosdk.Algodv2
-  private indexerClient: algosdk.Indexer
-  private ecoTokenId: number = 0 // Will be set after token creation
-  
+  indexerClient: algosdk.Indexer
+  ecoTokenId: number = 0
+
   constructor() {
-    // Using Algorand TestNet for development
     const algodToken = ''
     const algodServer = 'https://testnet-api.algonode.cloud'
     const algodPort = 443
-    
+
     const indexerToken = ''
     const indexerServer = 'https://testnet-idx.algonode.cloud'
     const indexerPort = 443
-    
+
     this.algodClient = new algosdk.Algodv2(algodToken, algodServer, algodPort)
     this.indexerClient = new algosdk.Indexer(indexerToken, indexerServer, indexerPort)
   }
 
   async connectWallet(): Promise<string> {
-    // In a real implementation, this would integrate with AlgoSigner or MyAlgo Connect
-    // For demo purposes, we'll simulate wallet connection
     try {
-      // Simulate wallet connection
       const account = algosdk.generateAccount()
       return account.addr
     } catch (error) {
@@ -33,11 +42,10 @@ export class AlgorandService {
 
   async createEcoToken(): Promise<number> {
     try {
-      // Create EcoToken (ASA - Algorand Standard Asset)
-      const creator = algosdk.generateAccount() // In real app, this would be the app's account
-      
-      const suggestedParams = await this.algodClient.getTransactionParams().do()
-      
+      const creator = algosdk.generateAccount()
+
+      const suggestedParams: SuggestedParams = await this.algodClient.getTransactionParams().do()
+
       const txn = algosdk.makeAssetCreateTxnWithSuggestedParamsFromObject({
         from: creator.addr,
         suggestedParams,
@@ -48,22 +56,24 @@ export class AlgorandService {
         reserve: creator.addr,
         freeze: creator.addr,
         clawback: creator.addr,
-        total: 1000000000, // 1 billion tokens
+        total: 1_000_000_000,
         decimals: 6,
         assetURL: 'https://ecometer.app/token-info',
-        assetMetadataHash: undefined,
+        assetMetadataHash: undefined as unknown as Uint8Array, // Explicit type fix
       })
 
       const signedTxn = txn.signTxn(creator.sk)
       const { txId } = await this.algodClient.sendRawTransaction(signedTxn).do()
-      
-      // Wait for confirmation
+
       await algosdk.waitForConfirmation(this.algodClient, txId, 4)
-      
-      // Get the asset ID
+
       const ptx = await this.algodClient.pendingTransactionInformation(txId).do()
-      const assetID = ptx['asset-index']
-      
+      const assetID = ptx['asset-index'] as number | undefined
+
+      if (!assetID) {
+        throw new Error('Asset creation failed: Asset ID not found.')
+      }
+
       this.ecoTokenId = assetID
       return assetID
     } catch (error) {
@@ -72,13 +82,12 @@ export class AlgorandService {
     }
   }
 
-  async mintAchievementNFT(userAddress: string, achievementData: any): Promise<string> {
+  async mintAchievementNFT( achievementData: AchievementData): Promise<string> {
     try {
-      const creator = algosdk.generateAccount() // App's NFT minting account
-      
-      const suggestedParams = await this.algodClient.getTransactionParams().do()
-      
-      // Create unique NFT for achievement
+      const creator = algosdk.generateAccount()
+
+      const suggestedParams: SuggestedParams = await this.algodClient.getTransactionParams().do()
+
       const txn = algosdk.makeAssetCreateTxnWithSuggestedParamsFromObject({
         from: creator.addr,
         suggestedParams,
@@ -89,23 +98,24 @@ export class AlgorandService {
         reserve: creator.addr,
         freeze: creator.addr,
         clawback: creator.addr,
-        total: 1, // NFT - only 1 unit
+        total: 1,
         decimals: 0,
         assetURL: achievementData.imageUrl || 'https://ecometer.app/nft-placeholder',
-        assetMetadataHash: undefined,
+        assetMetadataHash: undefined as unknown as Uint8Array,
       })
 
       const signedTxn = txn.signTxn(creator.sk)
       const { txId } = await this.algodClient.sendRawTransaction(signedTxn).do()
-      
+
       await algosdk.waitForConfirmation(this.algodClient, txId, 4)
-      
+
       const ptx = await this.algodClient.pendingTransactionInformation(txId).do()
-      const nftId = ptx['asset-index']
-      
-      // Transfer NFT to user (in real implementation)
-      // await this.transferNFT(creator, userAddress, nftId)
-      
+      const nftId = ptx['asset-index'] as number | undefined
+
+      if (!nftId) {
+        throw new Error('NFT minting failed: Asset ID not found.')
+      }
+
       return nftId.toString()
     } catch (error) {
       console.error('Error minting NFT:', error)
@@ -113,9 +123,9 @@ export class AlgorandService {
     }
   }
 
-  async getEcoTokenBalance(address: string): Promise<number> {
+  async getEcoTokenBalance(): Promise<number> {
     try {
-      // Simulate token balance for demo
+      // Simulate for demo
       return Math.floor(Math.random() * 1000) + 100
     } catch (error) {
       console.error('Error getting token balance:', error)
@@ -123,23 +133,23 @@ export class AlgorandService {
     }
   }
 
-  async getUserNFTs(address: string): Promise<any[]> {
+  async getUserNFTs(): Promise<NFT[]> {
     try {
-      // Simulate NFT collection for demo
+      const now = new Date().toISOString()
       return [
         {
           id: '1001',
           name: 'First Steps Achievement',
           description: 'Completed your first carbon tracking week',
           imageUrl: 'https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=300',
-          mintedAt: new Date().toISOString(),
+          mintedAt: now,
         },
         {
           id: '1002',
           name: 'Green Commuter',
           description: 'Used sustainable transport for 30 days',
           imageUrl: 'https://images.pexels.com/photos/919073/pexels-photo-919073.jpeg?auto=compress&cs=tinysrgb&w=300',
-          mintedAt: new Date().toISOString(),
+          mintedAt: now,
         }
       ]
     } catch (error) {
@@ -150,9 +160,7 @@ export class AlgorandService {
 
   async transferEcoTokens(from: string, to: string, amount: number): Promise<void> {
     try {
-      // Simulate token transfer for demo
       console.log(`Transferring ${amount} ECO tokens from ${from} to ${to}`)
-      // In real implementation, this would create and sign a transfer transaction
     } catch (error) {
       console.error('Error transferring tokens:', error)
       throw error
@@ -161,9 +169,7 @@ export class AlgorandService {
 
   async rewardUser(userAddress: string, amount: number, reason: string): Promise<void> {
     try {
-      // Simulate rewarding user with EcoTokens
       console.log(`Rewarding ${userAddress} with ${amount} ECO tokens for: ${reason}`)
-      // In real implementation, this would transfer tokens from app's reserve
     } catch (error) {
       console.error('Error rewarding user:', error)
       throw error

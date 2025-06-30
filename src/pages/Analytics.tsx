@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { 
   TrendingDown, 
   TrendingUp, 
-  Calendar, 
+  // Calendar, 
   Target,
   BarChart3,
   PieChart as PieChartIcon,
   Download,
-  Filter
+  // Filter
 } from 'lucide-react'
 import { 
-  LineChart, 
+  // LineChart, 
   Line, 
   AreaChart, 
   Area, 

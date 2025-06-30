@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Plus, Car, Zap, Utensils, Trash2, ShoppingBag, Save, Calculator, TreePine, Leaf, Home, Award, Info, HelpCircle, ChevronDown, ChevronUp } from 'lucide-react'
+import { Plus, Car, Zap, Utensils, Trash2, ShoppingBag, Save, Calculator, TreePine,  Home, Award,  HelpCircle, ChevronDown, ChevronUp } from 'lucide-react'
 import { CarbonCalculatorService, type ActivityData } from '../services/carbon'
 import toast from 'react-hot-toast'
 

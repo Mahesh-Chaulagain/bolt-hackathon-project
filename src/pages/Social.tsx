@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { 
   Users, 
   Trophy, 
   Globe, 
   MapPin, 
-  TrendingUp, 
-  Award,
+  // TrendingUp, 
+  // Award,
   UserPlus,
   MessageCircle,
   Share2,

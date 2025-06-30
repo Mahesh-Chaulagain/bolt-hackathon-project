@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { 
   User, 
@@ -7,7 +7,7 @@ import {
   Shield, 
   Globe, 
   Smartphone,
-  Mail,
+  // Mail,
   Lock,
   Camera,
   Save,
