@@ -57,45 +57,45 @@ export class AIService {
     }
   }
 
-  // async generateVoiceCoaching(text: string): Promise<string> {
-  //   try {
-  //     if (!this.elevenlabsApiKey) {
-  //       throw new Error('ElevenLabs API key not configured')
-  //     }
+  async generateVoiceCoaching(text: string): Promise<string> {
+    try {
+      // if (!this.elevenlabsApiKey) {
+      //   throw new Error('ElevenLabs API key not configured')
+      // }
       
-  //     // In a real implementation, this would call ElevenLabs API
-  //     console.log('Generating voice coaching for:', text)
+      // In a real implementation, this would call ElevenLabs API
+      console.log('Generating voice coaching for:', text)
       
-  //     // Simulate API call delay
-  //     await new Promise(resolve => setTimeout(resolve, 2000))
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 2000))
       
-  //     // Return a simulated audio URL
-  //     return 'https://example.com/generated-voice-coaching.mp3'
-  //   } catch (error) {
-  //     console.error('Error generating voice coaching:', error)
-  //     throw new Error('Failed to generate voice coaching. Please check your API configuration.')
-  //   }
-  // }
+      // Return a simulated audio URL
+      return 'https://example.com/generated-voice-coaching.mp3'
+    } catch (error) {
+      console.error('Error generating voice coaching:', error)
+      throw new Error('Failed to generate voice coaching. Please check your API configuration.')
+    }
+  }
 
-  // async createPersonalizedVideo(script: string, userData: any): Promise<string> {
-  //   try {
-  //     if (!this.tavusApiKey) {
-  //       throw new Error('Tavus API key not configured')
-  //     }
+  async createPersonalizedVideo(script: string, userData: any): Promise<string> {
+    try {
+      // if (!this.tavusApiKey) {
+      //   throw new Error('Tavus API key not configured')
+      // }
       
-  //     console.log('Creating personalized video with script:', script)
-  //     console.log('User data:', userData)
+      console.log('Creating personalized video with script:', script)
+      console.log('User data:', userData)
       
-  //     // Simulate API call delay
-  //     await new Promise(resolve => setTimeout(resolve, 3000))
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 3000))
       
-  //     // Return a simulated video URL
-  //     return 'https://example.com/personalized-coaching-video.mp4'
-  //   } catch (error) {
-  //     console.error('Error creating personalized video:', error)
-  //     throw new Error('Failed to create personalized video. Please check your API configuration.')
-  //   }
-  // }
+      // Return a simulated video URL
+      return 'https://example.com/personalized-coaching-video.mp4'
+    } catch (error) {
+      console.error('Error creating personalized video:', error)
+      throw new Error('Failed to create personalized video. Please check your API configuration.')
+    }
+  }
 
   async analyzeUserHabits(activities: any[]): Promise<any> {
     try {

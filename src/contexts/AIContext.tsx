@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react'
 import { AIService } from '../services/ai'
-import { useAuth } from './AuthContext'
+// import { useAuth } from './AuthContext'
 import toast from 'react-hot-toast'
 
 interface AIContextType {
@@ -24,7 +24,7 @@ export function useAI() {
 }
 
 export function AIProvider({ children }: { children: React.ReactNode }) {
-  const { user } = useAuth()
+  // const { user } = useAuth()
   const [aiService] = useState(() => new AIService())
   const [isProcessing, setIsProcessing] = useState(false)
 
