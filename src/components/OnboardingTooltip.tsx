@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ArrowLeft, ArrowRight, SkipForward } from 'lucide-react'
 import { useOnboarding } from '../contexts/OnboardingContext'

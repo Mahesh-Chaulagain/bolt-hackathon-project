@@ -1,4 +1,6 @@
 export interface ActivityData {
+  id?: string; 
+  co2_impact?: number
   category: string
   type: string
   value: number

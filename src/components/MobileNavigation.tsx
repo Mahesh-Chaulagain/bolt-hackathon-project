@@ -1,10 +1,10 @@
-import React from 'react'
+// import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { 
   Home, 
   Plus, 
   TrendingUp, 
-  Trophy, 
+  // Trophy, 
   User,
   Globe
 } from 'lucide-react'

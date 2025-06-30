@@ -1,5 +1,5 @@
-import { supabase } from '../supabase'
-import { Database } from '../supabase'
+import { supabase } from './supabase'
+import { Database } from './supabase'
 
 const db = supabase
 
